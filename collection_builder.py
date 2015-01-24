@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#/usr/bin/python
 
 #=====================================================================================
 # conversion from .bib file to Jekyll collection files (ver 1.0) 
@@ -73,7 +73,9 @@ def bib2jekyllcol (inputFile, outputDir):
                   "year", "month", "doi", "pages", "publisher", "booktitle", "note"]
     
     if not os.path.exists(outputDir):
+        print(outputDir + " does not exist.\n")
         os.makedirs(outputDir)
+        print(outputDir + " created. \n")
     else:
         print("Deleting existing collection file...\n")
         for file in os.listdir(outputDir):
@@ -83,6 +85,7 @@ def bib2jekyllcol (inputFile, outputDir):
                 os.unlink(file_path)
         except Exception, e:
             print e
+        print(outputDir+" is now an empty folder. Start conversion...")
  
     for entry in bib_database.entries:
         with open(outputDir+entry["id"]+'.md','w') as f:
@@ -118,8 +121,7 @@ def bib2jekyllcol (inputFile, outputDir):
             
             f.write("sort_key: "+ orderIdx + "\n")                                                             
             f.write("---")
-        
-
+    print("Conversion complete!\n")
     
 
 
